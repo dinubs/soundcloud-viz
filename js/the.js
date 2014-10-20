@@ -78,7 +78,7 @@ var Visualizer = function() {
             bgCtx.fillStyle = "#fff";
             bgCtx.fillRect(xVal * window.innerWidth,0,w,yVal);
             bgCtx.fillRect(xVal * window.innerWidth,window.innerHeight,w,-1 * yVal);
-            console.log(audioSource.streamData[0]);
+            // console.log(audioSource.streamData[0]);
 
         };
 
@@ -286,6 +286,7 @@ var UiUpdater = function() {
 
         infoTrack.innerHTML = '';
         infoTrack.appendChild(trackLink);
+        document.title = loader.sound.tracks[loader.streamPlaylistIndex].title
 
         // display the track info panel
         trackInfoPanel.className = '';
@@ -305,6 +306,7 @@ var UiUpdater = function() {
 
         var titleElement = document.createElement('h3');
         titleElement.innerHTML = title;
+        document.title = title;
 
         var messageElement = document.createElement('p');
         messageElement.innerHTML = message;
