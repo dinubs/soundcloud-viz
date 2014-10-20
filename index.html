@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Soundcloud Visualizer">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Soundcloud Visualizer</title>
+        <link rel="stylesheet" href="css/the.css">
+        <link rel="author" href="humans.txt">
+    </head>
+    <body>
+    	<div id="visualizer"></div>
+        <div id="controlPanel" class="hidden">
+	    	<div id="tab"><a href="#" id="toggleButton"><i class="icon-menu"></i></a></div>
+		    <div id="trackInfoPanel" class="hidden">
+	    	    <img id="infoImage" src="">
+	        	<div id="infoArtist"></div>
+	        	<div id="infoTrack"></div>
+	    	</div>
+    		<div id="playerControls">
+        		<audio id="player" controls="" autoplay="" preload autobuffer></audio>
+    		</div>
+		</div>
+
+		<div id="messageBox" class="hidden"></div>
+        <script src="http://connect.soundcloud.com/sdk.js"></script>
+        <script src="js/the.js"></script>
+    </body>
+</html>
