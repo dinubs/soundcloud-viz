@@ -1353,8 +1353,8 @@ window.SC.URI = function(uri, options) {
             request = new XMLHttpRequest;
             request.open(method, uri.toString(), true);
             request.setRequestHeader("Content-Type", contentType);
-            request.setRequestHeader("Access-Control-Allow-Origin", "http://gavindinubilo.github.io");
-            request.setRequestHeader("Access-Control-Allow-Credentials", "true");
+            // request.setRequestHeader("Access-Control-Allow-Origin", "http://gavindinubilo.github.io");
+            // request.setRequestHeader("Access-Control-Allow-Credentials", "true");
             
             request.onreadystatechange = function(e) {
                 if (e.target.readyState === 4) {
