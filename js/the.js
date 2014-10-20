@@ -77,7 +77,7 @@ var Visualizer = function() {
                 grd.addColorStop(1,"white");
             bgCtx.fillStyle = grd;
             bgCtx.fillRect(xVal * window.innerWidth,0,w,yVal);
-            var grd1=bgCtx.createLinearGradient(0,0,xVal,- 1 *yVal);
+            var grd1=bgCtx.createLinearGradient(0,0,xVal,window.innerHeight - yVal);
                 grd1.addColorStop(0,"white");
                 grd1.addColorStop(1,"rgba(255, 102, 0, 0.95");
             bgCtx.fillStyle = grd1;
