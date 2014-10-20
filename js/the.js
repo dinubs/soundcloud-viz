@@ -346,6 +346,8 @@ window.onload = function init() {
                 break;
         }   
     }
-    var trackUrl = 'https://soundcloud.com/radcircle/sets/radcircle-january-2013-top-13';
+
+    // Change this url to the url of the playlist
+    var trackUrl = 'https://soundcloud.com/radcircle/sets/upcoming-1';
     loadAndUpdate(trackUrl);
 };
