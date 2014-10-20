@@ -27,9 +27,6 @@ var SoundCloudAudioSource = function(player) {
     this.streamData = new Uint8Array(128);
     this.playStream = function(streamUrl) {
         // get the input stream from the audio element
-        player.addEventListener('ended', function(){
-            this.directStream('forward');
-        });
         player.setAttribute('src', streamUrl);
         player.play();
     }
@@ -311,6 +308,10 @@ window.onload = function init() {
     visualizer.init({
         containerId: 'visualizer',
         audioSource: audioSource
+    });
+
+    player.addEventListener('ended', function(){
+        loader.directStream('forward');
     });
 
 

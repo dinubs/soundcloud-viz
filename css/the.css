@@ -58,7 +58,7 @@ a:hover, a:active {
 #controlPanel {
     z-index: 50;
     position: absolute;
-    bottom: 35px;
+    bottom: 0;
     width: 100%;
     color: #999;
     max-height: 600px;
