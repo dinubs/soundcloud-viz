@@ -98,15 +98,12 @@ var Visualizer = function() {
     };
 
     this.resizeCanvas = function() {
-        if (fgCanvas) {
             // resize the bg canvas
             bgCanvas.width = window.innerWidth;
             bgCanvas.height = window.innerHeight;
 
-            tileSize = fgCanvas.width > fgCanvas.height ? fgCanvas.width / 25 : fgCanvas.height / 25;
 
             drawBg();
-        }
     };
 
     var draw = function() {
