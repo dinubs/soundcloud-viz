@@ -1,8 +1,15 @@
 var SoundCloudAudioSource = function(player) {
     var self = this;
     var analyser;
-    var AudioContext = window.AudioContext || window.webkitAudioContext;
-    var audioCtx = new AudioContext();
+    var audioCtx;
+    if (typeof AudioContext !== "undefined") {
+        audioCtx = new AudioContext();
+    } else if (typeof webkitAudioContext !== "undefined") {
+        audioCtx = new webkitAudioContext();
+    } else {
+        throw new Error('AudioContext not supported. :(');
+    }
+    // var audioCtx = new AudioContext();
     analyser = audioCtx.createAnalyser();
     analyser.fftSize = 256;
     var source = audioCtx.createMediaElementSource(player);
