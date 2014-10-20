@@ -31,7 +31,7 @@ var SoundCloudAudioSource = function(player) {
     this.playStream = function(streamUrl) {
         // get the input stream from the audio element
         player.addEventListener('ended', function(){
-            self.directStream('forward');
+            this.directStream('forward');
         });
         player.setAttribute('src', streamUrl);
         player.play();
@@ -47,13 +47,8 @@ var Visualizer = function() {
     var tiles = [];
     var stars = [];
     // canvas vars
-    var fgCanvas;
-    var fgCtx;
-    var fgRotation = 0.001;
     var bgCanvas;
     var bgCtx;
-    var sfCanvas;
-    var sfCtx;
     var audioSource;
 
     var drawBg = function() {
@@ -72,7 +67,7 @@ var Visualizer = function() {
         // grd.addColorStop(0.8, "rgba(" +
         //     255 + ", " +
         //     102 + ", " +
-        //     0 + ", 0.4)"); // edges are reddish
+        //     0 + ", 0.4)"); // edges are orangish
 
         // bgCtx.fillStyle = grd;
         // bgCtx.fill();
@@ -104,18 +99,9 @@ var Visualizer = function() {
 
     this.resizeCanvas = function() {
         if (fgCanvas) {
-            // resize the foreground canvas
-            fgCanvas.width = window.innerWidth;
-            fgCanvas.height = window.innerHeight;
-            fgCtx.translate(fgCanvas.width/2,fgCanvas.height/2);
-
             // resize the bg canvas
             bgCanvas.width = window.innerWidth;
             bgCanvas.height = window.innerHeight;
-            // resize the starfield canvas
-            sfCanvas.width = window.innerWidth;
-            sfCanvas.height = window.innerHeight;
-            sfCtx.translate(fgCanvas.width/2,fgCanvas.height/2);
 
             tileSize = fgCanvas.width > fgCanvas.height ? fgCanvas.width / 25 : fgCanvas.height / 25;
 
@@ -124,42 +110,13 @@ var Visualizer = function() {
     };
 
     var draw = function() {
-        // fgCtx.clearRect(-fgCanvas.width, -fgCanvas.height, fgCanvas.width*2, fgCanvas.height *2);
-        // sfCtx.clearRect(-fgCanvas.width/2, -fgCanvas.height/2, fgCanvas.width, fgCanvas.height);
-
-        // tiles.forEach(function(tile) {
-        //     tile.drawPolygon();
-        // });
-        // tiles.forEach(function(tile) {
-        //     if (tile.highlight > 0) {
-        //         tile.drawHighlight();
-        //     }
-        // });
-
-
-        // debug
-        /* fgCtx.font = "bold 24px sans-serif";
-         fgCtx.fillStyle = 'grey';
-         fgCtx.fillText("minMental:" + minMental, 10, 10);
-         fgCtx.fillText("maxMental:" + maxMental, 10, 40);*/
-        requestAnimationFrame(draw);
+        
+        // requestAnimationFrame(draw);
     };
 
     this.init = function(options) {
         audioSource = options.audioSource;
         var container = document.getElementById(options.containerId);
-
-        // foreground hexagons layer
-        fgCanvas = document.createElement('canvas');
-        fgCanvas.setAttribute('style', 'position: absolute; z-index: 10');
-        fgCtx = fgCanvas.getContext("2d");
-        container.appendChild(fgCanvas);
-
-        // middle starfield layer
-        sfCanvas = document.createElement('canvas');
-        sfCtx = sfCanvas.getContext("2d");
-        sfCanvas.setAttribute('style', 'position: absolute; z-index: 5');
-        container.appendChild(sfCanvas);
 
         // background image layer
         bgCanvas = document.createElement('canvas');
@@ -356,10 +313,6 @@ window.onload = function init() {
                 uiUpdater.displayMessage("Error", loader.errorMessage);
             });
     };
-    // player.addEventListener("ended", function() 
-    //  {
-    //       loader.directStream('forward');
-    //  });
 
     visualizer.init({
         containerId: 'visualizer',
