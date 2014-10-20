@@ -74,9 +74,10 @@ var Visualizer = function() {
             // var val = Math.pow((audioSource.streamData[bucket]/255),2)*255;
             var xVal = i / (128 - 44);
             var yVal = (audioSource.streamData[i] / 255) * (window.innerHeight / 2);
+            var w = 10;
             bgCtx.fillStyle = "#fff";
-            bgCtx.fillRect(xVal * window.innerWidth,0,4,yVal);
-            bgCtx.fillRect(xVal * window.innerWidth,window.innerHeight,4,-1 * yVal);
+            bgCtx.fillRect(xVal * window.innerWidth,0,w,yVal);
+            bgCtx.fillRect(xVal * window.innerWidth,window.innerHeight,w,-1 * yVal);
             console.log(audioSource.streamData[0]);
 
         };
@@ -291,7 +292,6 @@ var UiUpdater = function() {
 
         // add a hash to the URL so it can be shared or saved
         var trackToken = loader.sound.permalink_url.substr(22);
-        window.location = '#' + trackToken;
     };
     this.toggleControlPanel = function() {
         if (controlPanel.className.indexOf('hidden') === 0) {
