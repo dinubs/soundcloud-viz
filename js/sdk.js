@@ -1354,6 +1354,8 @@ window.SC.URI = function(uri, options) {
             request.open(method, uri.toString(), true);
             request.setRequestHeader("Content-Type", contentType);
             request.setRequestHeader("Access-Control-Allow-Origin", "http://gavindinubilo.github.io");
+            request.setRequestHeader("Access-Control-Allow-Credentials", "true");
+            
             request.onreadystatechange = function(e) {
                 if (e.target.readyState === 4) {
                     return callback(e.target.responseText, e.target)
