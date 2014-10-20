@@ -73,7 +73,7 @@ var Visualizer = function() {
             var yVal = (audioSource.streamData[i] / 255) * (window.innerHeight / 2);
             var w = 10;
             var grd=bgCtx.createLinearGradient(0,0,170,0);
-                grd.addColorStop(0,"rgba(255, 102, 0");
+                grd.addColorStop(0,"rgba(255, 102, 0, 0.95");
                 grd.addColorStop(1,"white");
             bgCtx.fillStyle = grd;
             bgCtx.fillRect(xVal * window.innerWidth,0,w,yVal);
