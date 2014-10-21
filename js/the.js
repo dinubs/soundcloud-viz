@@ -44,6 +44,7 @@ var Visualizer = function() {
     var bgCanvas;
     var bgCtx;
     var audioSource;
+    var color;
 
     var drawBg = function() {
         bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
@@ -73,13 +74,13 @@ var Visualizer = function() {
             var yVal = (audioSource.streamData[i] / 255) * (window.innerHeight / 2);
             var w = 10;
             var grd=bgCtx.createLinearGradient(0,0,xVal,yVal);
-                grd.addColorStop(1,"rgba(255, 102, 0, 0.95");
-                grd.addColorStop(0,"black");
+                grd.addColorStop(1,window.endColor);
+                grd.addColorStop(0,window.startColor);
             bgCtx.fillStyle = grd;
             bgCtx.fillRect(xVal * window.innerWidth,0,w,yVal);
             var grd1=bgCtx.createLinearGradient(0,window.innerHeight - yVal,xVal,window.innerHeight);
-                grd1.addColorStop(1,"black");
-                grd1.addColorStop(0,"rgba(255, 102, 0, 0.95");
+                grd1.addColorStop(1,window.startColor);
+                grd1.addColorStop(0,window.endColor);
             bgCtx.fillStyle = grd1;
             bgCtx.fillRect(xVal * window.innerWidth,window.innerHeight,w,-1 * yVal);
             // console.log(audioSource.streamData[0]);
@@ -103,7 +104,6 @@ var Visualizer = function() {
             bgCanvas.width = window.innerWidth;
             bgCanvas.height = window.innerHeight;
 
-
             drawBg();
     };
 
@@ -115,7 +115,8 @@ var Visualizer = function() {
     this.init = function(options) {
         audioSource = options.audioSource;
         var container = document.getElementById(options.containerId);
-
+        window.endColor = options.endColor || "rgb(255,255,255)";
+        window.startColor = options.startColor || "rgb(0,0,0)";
         // background image layer
         bgCanvas = document.createElement('canvas');
         bgCtx = bgCanvas.getContext("2d");
@@ -314,7 +315,9 @@ window.onload = function init() {
 
     visualizer.init({
         containerId: 'visualizer',
-        audioSource: audioSource
+        audioSource: audioSource,
+        startColor: "rgb(0,0,0)",
+        endColor: "rgb(255,102,0)"
     });
 
     player.addEventListener('ended', function(){

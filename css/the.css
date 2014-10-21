@@ -183,6 +183,13 @@ footer {
 #scLogo {
     float: right;
 }
+.colorPiq {
+    position: fixed;
+    top: 0;
+}
+#endColor {
+    right: 0;
+}
 /* make some txt small for small screens */
 @media (max-width: 900px) {
     footer {
