@@ -320,6 +320,10 @@ window.onload = function init() {
     if (window.location.hash) {
         var trackUrl = 'https://soundcloud.com/' + window.location.hash.substr(1);
         loadAndUpdate(trackUrl);
+    } else{
+        // Change this url to the url of the playlist
+        var trackUrl = 'https://soundcloud.com/radcircle/sets/upcoming-1';
+        loadAndUpdate(trackUrl);
     }
 
     var toggleButton = document.getElementById('toggleButton')
@@ -346,8 +350,4 @@ window.onload = function init() {
                 break;
         }   
     }
-
-    // Change this url to the url of the playlist
-    var trackUrl = 'https://soundcloud.com/radcircle/sets/upcoming-1';
-    loadAndUpdate(trackUrl);
 };
