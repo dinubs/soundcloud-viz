@@ -83,7 +83,6 @@ var Visualizer = function() {
                 grd1.addColorStop(0,window.endColor);
             bgCtx.fillStyle = grd1 || window.startColor;
             bgCtx.fillRect(xVal * window.innerWidth + 10,window.innerHeight,w,-1 * yVal);
-            console.log(audioSource.streamData[i]);
         };
 
         
