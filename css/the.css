@@ -45,6 +45,7 @@ body {
     background-color: #000000;
     overflow: hidden;
     font-family: sans-serif;
+    color: #fff;
 }
 a, a:visited {
     text-decoration: none;

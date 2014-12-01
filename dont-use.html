@@ -18,6 +18,8 @@
     			Canvas is not supported
 			</canvas>
     	</div>
+    	<div id="startColor" class="colorPiq"></div>
+	    <div id="endColor" class="colorPiq"></div>
         <div id="controlPanel" class="hidden">
 	    	<div id="tab"><a href="#" id="toggleButton"><i class="icon-menu"></i></a></div>
 		    <div id="trackInfoPanel" class="hidden">
@@ -31,5 +33,16 @@
         		<audio id="player" controls="" autoplay="" preload autobuffer></audio>
     		</div>
 		</div>
+
+		<div id="messageBox" class="hidden"></div>
+        <script src="js/farbtastic.js"></script>
+        <script>
+        	$('#startColor').farbtastic(function(color) {
+        		window.startColor = color;
+        	});
+        	$("#endColor").farbtastic(function(color) {
+        		window.endColor = color;
+        	})
+        </script>
     </body>
 </html>

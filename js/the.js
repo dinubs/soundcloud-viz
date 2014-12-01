@@ -1,12 +1,11 @@
 var SoundCloudAudioSource = function(player) {
     var self = this;
     var analyser;
-    var contextClass = (window.AudioContext || 
-                          window.webkitAudioContext || 
-                          window.mozAudioContext || 
-                          window.oAudioContext || 
-                          window.msAudioContext);
-    var audioCtx = new AudioContext();
+    if('webkitAudioContext' in window) {
+        var audioCtx  = new window.webkitAudioContext();
+    }
+    console.log(player);
+    // var audioCtx = new AudioContext();
     analyser = audioCtx.createAnalyser();
     analyser.fftSize = 256;
     var source = audioCtx.createMediaElementSource(player);
@@ -45,8 +44,10 @@ var Visualizer = function() {
     var bgCtx;
     var audioSource;
     var color;
+    bgCanvas = document.getElementById("can");
 
     var drawBg = function() {
+        bgCtx = bgCanvas.getContext("2d");
         bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
         var r, g, b, a;
         var val = audioSource.volume/1000;
@@ -66,25 +67,23 @@ var Visualizer = function() {
 
         // bgCtx.fillStyle = grd;
         // bgCtx.fill();
-
-        for (var i = 0; i < (128 - 44); i++) {
+        for (var i = 0; i < (80); i++) {
             // var bucket = Math.ceil(audioSource.streamData.length/tiles.length*this.num);
             // var val = Math.pow((audioSource.streamData[bucket]/255),2)*255;
-            var xVal = i / (128 - 44);
+            var xVal = i / (80);
             var yVal = (audioSource.streamData[i] / 255) * (window.innerHeight / 2);
             var w = 10;
             var grd=bgCtx.createLinearGradient(0,0,xVal,yVal);
                 grd.addColorStop(1,window.endColor);
                 grd.addColorStop(0,window.startColor);
-            bgCtx.fillStyle = grd;
-            bgCtx.fillRect(xVal * window.innerWidth,0,w,yVal);
+            bgCtx.fillStyle = grd || window.startColor;
+            bgCtx.fillRect(xVal * window.innerWidth + 10,0,w,yVal);
             var grd1=bgCtx.createLinearGradient(0,window.innerHeight - yVal,xVal,window.innerHeight);
                 grd1.addColorStop(1,window.startColor);
                 grd1.addColorStop(0,window.endColor);
-            bgCtx.fillStyle = grd1;
-            bgCtx.fillRect(xVal * window.innerWidth,window.innerHeight,w,-1 * yVal);
-            // console.log(audioSource.streamData[0]);
-
+            bgCtx.fillStyle = grd1 || window.startColor;
+            bgCtx.fillRect(xVal * window.innerWidth + 10,window.innerHeight,w,-1 * yVal);
+            console.log(audioSource.streamData[i]);
         };
 
         
@@ -107,23 +106,14 @@ var Visualizer = function() {
             drawBg();
     };
 
-    var draw = function() {
-        
-        // requestAnimationFrame(draw);
-    };
-
     this.init = function(options) {
         audioSource = options.audioSource;
         var container = document.getElementById(options.containerId);
         window.endColor = options.endColor || "rgb(255,255,255)";
         window.startColor = options.startColor || "rgb(0,0,0)";
         // background image layer
-        bgCanvas = document.createElement('canvas');
-        bgCtx = bgCanvas.getContext("2d");
-        container.appendChild(bgCanvas);
 
         this.resizeCanvas();
-        draw();
 
 
         setInterval(drawBg, 100);
@@ -316,8 +306,9 @@ window.onload = function init() {
     visualizer.init({
         containerId: 'visualizer',
         audioSource: audioSource,
-        startColor: "rgb(0,0,0)",
-        endColor: "rgb(255,102,0)"
+        // For Changing the colors
+        startColor: "rgb(255,255,255)",
+        endColor: "rgb(255,255,255)"
     });
 
     player.addEventListener('ended', function(){
@@ -328,7 +319,7 @@ window.onload = function init() {
     uiUpdater.toggleControlPanel();
     // on load, check to see if there is a track token in the URL, and if so, load that automatically
     if (window.location.hash) {
-        var trackUrl = 'https://soundcloud.com/radcircle/sets/radcircle-january-2013-top-13';
+        var trackUrl = 'https://soundcloud.com/' + window.location.hash.substr(1);
         loadAndUpdate(trackUrl);
     }
 
