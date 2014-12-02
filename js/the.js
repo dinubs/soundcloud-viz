@@ -3,6 +3,8 @@ var SoundCloudAudioSource = function(player) {
     var analyser;
     if('webkitAudioContext' in window) {
         var audioCtx  = new window.webkitAudioContext();
+    } else {
+        var audioCtx = new window.AudioContext();
     }
     console.log(player);
     // var audioCtx = new AudioContext();
@@ -22,7 +24,6 @@ var SoundCloudAudioSource = function(player) {
     };
     setInterval(sampleAudioStream, 20);
     // public properties and methods
-    this.volume = 0;
     this.streamData = new Uint8Array(128);
     this.playStream = function(streamUrl) {
         // get the input stream from the audio element
@@ -219,11 +220,9 @@ var UiUpdater = function() {
     };
     this.update = function(loader) {
         // update the track and artist into in the controlPanel
-        var artistLink = document.createElement('a');
-        artistLink.setAttribute('href', loader.sound.user.permalink_url);
+        var artistLink = document.createElement('span');
         artistLink.innerHTML = loader.sound.user.username;
-        var trackLink = document.createElement('a');
-        trackLink.setAttribute('href', loader.sound.permalink_url);
+        var trackLink = document.createElement('span');
 
         if(loader.sound.kind=="playlist"){
             trackLink.innerHTML = "<p>" + loader.sound.tracks[loader.streamPlaylistIndex].title + "</p>" + "<p>"+loader.sound.title+"</p>";
